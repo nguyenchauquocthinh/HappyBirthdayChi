@@ -58,8 +58,6 @@ Tiền vào như nước.
 
 Gia đình luôn hạnh phúc.
 
-Cảm ơn chị đã luôn quan tâm và yêu thương em.
-
 Mong rằng tuổi mới sẽ mang đến thật nhiều điều tốt đẹp.
 
 Hy vọng nụ cười sẽ luôn nở trên môi chị.
