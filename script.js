@@ -56,13 +56,11 @@ Công việc luôn thuận lợi.
 
 Tiền vào như nước.
 
-Gia đình luôn hạnh phúc.
-
 Mong rằng tuổi mới sẽ mang đến thật nhiều điều tốt đẹp.
 
 Hy vọng nụ cười sẽ luôn nở trên môi chị.
 
-Hãy luôn sống thật hạnh phúc nhé.
+Hãy luôn sống thật hạnh phúc nhé Chị hihi.
 
 Happy Birthday ❤️
 
