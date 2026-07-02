@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>🎂 Happy Birthday Chị 🎂</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap"
+rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:Poppins,sans-serif;
+
+overflow-x:hidden;
+
+background:linear-gradient(180deg,#63b3ff,#87ceeb,#b7e8ff);
+
+min-height:100vh;
+
+color:white;
+
+text-align:center;
+
+}
+
+/* nền sao */
+
+.star{
+
+position:fixed;
+
+width:3px;
+
+height:3px;
+
+background:white;
+
+border-radius:50%;
+
+animation:twinkle 2s infinite;
+
+opacity:.8;
+
+}
+
+@keyframes twinkle{
+
+0%{opacity:.2;}
+
+50%{opacity:1;}
+
+100%{opacity:.2;}
+
+}
+
+/* trái tim */
+
+.heart{
+
+position:fixed;
+
+bottom:-50px;
+
+color:#ff4d6d;
+
+font-size:25px;
+
+animation:float 10s linear infinite;
+
+}
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0) rotate(0);
+
+opacity:1;
+
+}
+
+100%{
+
+transform:translateY(-120vh) rotate(360deg);
+
+opacity:0;
+
+}
+
+}
+
+/* container */
+
+.container{
+
+position:relative;
+
+z-index:10;
+
+padding:20px;
+
+max-width:1200px;
+
+margin:0 auto;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+min-height:100vh;
+
+}
+
+/* tiêu đề */
+
+.title{
+
+font-size:clamp(40px, 8vw, 70px);
+
+font-family:'Dancing Script',cursive;
+
+text-shadow:0 0 25px #fff;
+
+margin-top:0;
+
+margin-bottom:15px;
+
+animation:slideDown 0.8s ease-out;
+
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.subtitle{
+
+font-size:clamp(16px, 4vw, 22px);
+
+margin-bottom:20px;
+
+opacity:.95;
+
+animation:slideDown 1s ease-out 0.2s both;
+
+}
+
+/* ảnh */
+
+.avatar{
+
+margin:20px 0;
+
+width:min(320px, 80vw);
+
+height:min(320px, 80vw);
+
+border-radius:50%;
+
+overflow:hidden;
+
+border:8px solid white;
+
+box-shadow:0 0 40px rgba(255,255,255,.8);
+
+animation:zoom 4s infinite;
+
+flex-shrink:0;
+
+}
+
+.avatar img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+}
+
+@keyframes zoom{
+
+0%{transform:scale(1);}
+
+50%{transform:scale(1.05);}
+
+100%{transform:scale(1);}
+
+}
+
+#message{
+
+margin-top:30px;
+
+margin-bottom:30px;
+
+font-size:clamp(18px, 3vw, 28px);
+
+line-height:2;
+
+max-width:900px;
+
+width:100%;
+
+min-height:auto;
+
+white-space:pre-line;
+
+font-weight:500;
+
+padding:20px;
+
+word-wrap:break-word;
+
+overflow-wrap:break-word;
+
+}
+
+/* bánh */
+
+.cake{
+
+font-size:clamp(80px, 20vw, 140px);
+
+display:none;
+
+margin:20px 0;
+
+animation:bounce 1s infinite;
+
+}
+
+@keyframes bounce{
+
+50%{
+
+transform:translateY(-15px);
+
+}
+
+}
+
+/* footer */
+
+footer{
+
+margin-top:40px;
+
+margin-bottom:40px;
+
+font-size:clamp(14px, 3vw, 20px);
+
+opacity:.9;
+
+}
+
+.wave{
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+height:clamp(80px, 15vw, 180px);
+
+background:rgba(255,255,255,.18);
+
+border-radius:100% 100% 0 0;
+
+animation:wave 5s ease-in-out infinite;
+
+}
+
+@keyframes wave{
+
+0%{
+
+transform:translateY(20px);
+
+}
+
+50%{
+
+transform:translateY(0);
+
+}
+
+100%{
+
+transform:translateY(20px);
+
+}
+
+}
+
+/* Hộp quà 3D */
+.gift-box {
+    perspective: 1000px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.gift-box-inner {
+    width: clamp(120px, 30vw, 180px);
+    height: clamp(120px, 30vw, 180px);
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
+
+.gift-box-inner.opened {
+    transform: rotateX(90deg) rotateY(0deg);
+}
+
+.gift-box-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(50px, 12vw, 100px);
+    background: linear-gradient(135deg, #ff6b9d, #ff4d6d);
+    border: 4px solid white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    backface-visibility: hidden;
+}
+
+.gift-box-top {
+    transform: translateZ(60px);
+}
+
+.gift-box-bottom {
+    transform: rotateX(180deg) translateZ(60px);
+}
+
+/* Người dùng thông tin */
+.user-info {
+    margin: 15px 0;
+    font-size: clamp(14px, 3vw, 18px);
+    opacity: 0.9;
+    animation:slideDown 1.2s ease-out 0.4s both;
+}
+
+.age-display {
+    font-size: clamp(32px, 10vw, 48px);
+    font-weight: bold;
+    color: #ff6b9d;
+    margin: 10px 0;
+    text-shadow: 0 0 15px rgba(255, 107, 157, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Hoa rơi */
+.flower {
+    position: fixed;
+    font-size: 25px;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fallFlower 8s linear forwards;
+}
+
+@keyframes fallFlower {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Glow effect */
+.glow {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+@keyframes glow-pulse {
+    0% { box-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,107,157,0.3); }
+    50% { box-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(255,107,157,0.6); }
+    100% { box-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,107,157,0.3); }
+}
+
+/* Avatar glow */
+.avatar {
+    animation: zoom 4s infinite, glow-pulse 3s ease-in-out infinite;
+}
+
+/* Chữ fade in */
+.fade-in-line {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding-bottom: 120px;
+    }
+    
+    .container {
+        padding: 15px;
+        min-height: auto;
+        padding-bottom: 180px;
+    }
+    
+    .wave {
+        height: 100px;
+    }
+    
+    footer {
+        margin-top: 20px;
+        margin-bottom: 80px;
+    }
+}
+
+@media (min-width: 769px) {
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .container {
+        padding: 40px;
+    }
+}
+
+/* Mouse cursor glow */
+body.cursor-glow {
+    cursor: radial-gradient(circle, rgba(255,255,255,0.8), transparent) 0 0 / 30px 30px fixed;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wave"></div>
+
+<div class="container">
+
+<h1 class="title">
+
+🎂 Happy Birthday Chị 🎂
+
+</h1>
+
+<p class="subtitle">
+
+Chúc chị có một tuổi mới thật nhiều niềm vui ❤️
+
+</p>
+
+<div class="user-info">
+    <div id="ageInfo"></div>
+    <div id="dateInfo"></div>
+</div>
+
+<div class="avatar">
+
+<img src="assets/chi.jpg">
+
+</div>
+
+<div class="gift-box" id="giftBox" onclick="openGift(event)">
+    <div class="gift-box-inner" id="giftBoxInner">
+        <div class="gift-box-face gift-box-top">🎁</div>
+        <div class="gift-box-face gift-box-bottom">🎉</div>
+    </div>
+</div>
+
+<div class="cake" id="cake">
+
+🎂
+
+</div>
+
+<div id="message"></div>
+
+<footer>
+
+Made with ❤️ by Em Trai
+
+</footer>
+
+</div>
+
+<script>
+// ======= Âm thanh tác dụng =======
+const sounds = {
+    pop: new Audio('data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA=='),
+    tada: new Audio('data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA=='),
+};
+
+function playSound(type) {
+    try {
+        if (sounds[type]) sounds[type].play().catch(() => {});
+    } catch (e) {}
+}
+
+// ======= Thông tin sinh nhật =======
+const birthDate = new Date(2003, 6, 2); // Sinh ngày 2/7/2003
+const today = new Date();
+let age = today.getFullYear() - birthDate.getFullYear();
+if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
+    age--;
+}
+
+document.getElementById('ageInfo').innerHTML = `<div class="age-display">🎂 ${age + 1} Tuổi 🎂</div>`;
+document.getElementById('dateInfo').innerHTML = `Ngày ${birthDate.getDate()} tháng ${birthDate.getMonth() + 1}`;
+
+// ======= Tạo bầu trời sao =======
+for (let i = 0; i < 120; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 2 + "s";
+    document.body.appendChild(star);
+}
+
+// ======= Tim bay =======
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (20 + Math.random() * 30) + "px";
+    heart.style.animationDuration = (6 + Math.random() * 6) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => {
+        heart.remove();
+    }, 12000);
+}
+
+setInterval(createHeart, 500);
+
+// ======= Hoa rơi =======
+const flowers = ['🌸', '🌺', '🌼', '🌻', '🌷'];
+function createFlower() {
+    const flower = document.createElement("div");
+    flower.className = "flower";
+    flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.fontSize = (20 + Math.random() * 20) + "px";
+    document.body.appendChild(flower);
+    setTimeout(() => flower.remove(), 8000);
+}
+
+setInterval(createFlower, 800);
+
+// ======= Pháo hoa =======
+function launchFireworks() {
+    const duration = 7000;
+    const end = Date.now() + duration;
+    const interval = setInterval(() => {
+        confetti({
+            particleCount: 8,
+            angle: 60,
+            spread: 80,
+            origin: { x: 0 }
+        });
+        confetti({
+            particleCount: 8,
+            angle: 120,
+            spread: 80,
+            origin: { x: 1 }
+        });
+        confetti({
+            particleCount: 25,
+            spread: 120,
+            origin: {
+                x: Math.random(),
+                y: Math.random() - 0.2
+            }
+        });
+        playSound('pop');
+        if (Date.now() > end) {
+            clearInterval(interval);
+        }
+    }, 250);
+}
+
+// ======= Pháo hoa màu sắc =======
+function launchColoredFireworks() {
+    const colors = ['#ff4d6d', '#ffc700', '#00d4ff', '#00ff88', '#ff00ff'];
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            confetti({
+                particleCount: 50,
+                spread: 120,
+                origin: { x: Math.random(), y: Math.random() - 0.2 },
+                colors: [colors[i % colors.length]]
+            });
+            playSound('pop');
+        }, i * 200);
+    }
+}
+
+// ======= Bong bóng =======
+function createBalloon() {
+    const balloon = document.createElement("div");
+    balloon.innerHTML = "🎈";
+    balloon.style.position = "fixed";
+    balloon.style.left = Math.random() * 100 + "vw";
+    balloon.style.bottom = "-80px";
+    balloon.style.fontSize = (35 + Math.random() * 30) + "px";
+    balloon.style.zIndex = "2";
+    balloon.style.animation = "floatBalloon 12s linear forwards";
+    document.body.appendChild(balloon);
+    setTimeout(() => {
+        balloon.remove();
+    }, 12000);
+}
+
+const balloonStyle = document.createElement("style");
+balloonStyle.innerHTML = `
+@keyframes floatBalloon {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-120vh); }
+}
+`;
+document.head.appendChild(balloonStyle);
+
+setInterval(createBalloon, 1500);
+
+// ======= Hiệu ứng chuột =======
+let mouseX = 0, mouseY = 0;
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+document.addEventListener('click', (e) => {
+    confetti({
+        particleCount: 15,
+        origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+    });
+    playSound('pop');
+});
+
+// ======= Nhạc =======
+const music = new Audio("music.mp3");
+music.loop = true;
+let isPlaying = false;
+
+function playMusic() {
+    if (!isPlaying) {
+        music.play().catch(() => {});
+        isPlaying = true;
+    }
+}
+
+// ======= Lời chúc với hiệu ứng =======
+const text = `🎉 Happy Birthday Chị! 🎉
+
+Chúc chị có một ngày sinh nhật thật hạnh phúc.
+
+Chúc chị luôn mạnh khỏe.
+
+Luôn xinh đẹp.
+
+Luôn vui vẻ.
+
+Luôn gặp nhiều may mắn.
+
+Mọi dự định đều thành công.
+
+Công việc luôn thuận lợi.
+
+Tiền vào như nước.
+
+Gia đình luôn hạnh phúc.
+
+Cảm ơn chị đã luôn quan tâm và yêu thương em.
+
+Mong rằng tuổi mới sẽ mang đến thật nhiều điều tốt đẹp.
+
+Hy vọng nụ cười sẽ luôn nở trên môi chị.
+
+Hãy luôn sống thật hạnh phúc nhé.
+
+Happy Birthday ❤️`;
+
+let index = 0;
+
+function typeWriter() {
+    const messageEl = document.getElementById("message");
+    if (index < text.length) {
+        messageEl.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 45);
+    }
+}
+
+// ======= Mở quà =======
+function openGift(event) {
+    if (event) event.preventDefault();
+    
+    const giftBox = document.getElementById('giftBoxInner');
+    const cake = document.getElementById("cake");
+    
+    if (giftBox && !giftBox.classList.contains('opened')) {
+        giftBox.classList.add('opened');
+        playSound('tada');
+    }
+    
+    cake.style.display = "block";
+    document.getElementById("message").innerHTML = "";
+    index = 0;
+    
+    playMusic();
+    launchColoredFireworks();
+    
+    setTimeout(typeWriter, 500);
+}
+
+// ======= Hiệu ứng khi mở trang =======
+window.onload = () => {
+    confetti({
+        particleCount: 180,
+        spread: 100,
+        origin: { y: 0.6 }
+    });
+    
+    // Thêm glow effect cho avatar
+    const avatar = document.querySelector('.avatar');
+    if (avatar) {
+        avatar.style.boxShadow = '0 0 40px rgba(255,255,255,.8), 0 0 80px rgba(255,107,157,0.6)';
+    }
+};
+
+// ======= Flash light effect =======
+function createFlash() {
+    const flash = document.createElement('div');
+    flash.style.position = 'fixed';
+    flash.style.width = '100%';
+    flash.style.height = '100%';
+    flash.style.top = '0';
+    flash.style.left = '0';
+    flash.style.background = 'white';
+    flash.style.opacity = '0';
+    flash.style.pointerEvents = 'none';
+    flash.style.zIndex = '9999';
+    document.body.appendChild(flash);
+    
+    flash.style.animation = 'flashLight 0.3s ease-out';
+    setTimeout(() => flash.remove(), 300);
+}
+
+// Thêm keyframe cho flash light
+const flashStyle = document.createElement('style');
+flashStyle.innerHTML = `
+@keyframes flashLight {
+    0% { opacity: 0.8; }
+    100% { opacity: 0; }
+}
+`;
+document.head.appendChild(flashStyle);
+
+// Gọi flash khi bấm nút
+document.addEventListener('click', () => {
+    if (Math.random() > 0.7) createFlash();
+});
+
+</script>
